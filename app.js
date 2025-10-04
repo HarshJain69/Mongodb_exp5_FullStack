@@ -1,4 +1,5 @@
 
+
 const express = require('express');
 const mongoose = require('mongoose');
 const Product = require('./models/Product');
@@ -17,7 +18,7 @@ mongoose.connect(process.env.MONGO_URI, {
   console.error('MongoDB connection error:', err);
 });
 
-// Add a new product
+// Product CRUD routes
 app.post('/products', async (req, res) => {
   try {
     const product = new Product(req.body);
@@ -28,7 +29,6 @@ app.post('/products', async (req, res) => {
   }
 });
 
-// Retrieve all products
 app.get('/products', async (req, res) => {
   try {
     const products = await Product.find();
@@ -38,7 +38,6 @@ app.get('/products', async (req, res) => {
   }
 });
 
-// Update a product by ID
 app.put('/products/:id', async (req, res) => {
   try {
     const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
@@ -49,7 +48,6 @@ app.put('/products/:id', async (req, res) => {
   }
 });
 
-// Delete a product by ID
 app.delete('/products/:id', async (req, res) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id);
@@ -59,6 +57,10 @@ app.delete('/products/:id', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+// Student routes (MVC)
+const studentRoutes = require('./routes/studentRoutes');
+app.use('/students', studentRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
