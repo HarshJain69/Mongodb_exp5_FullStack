@@ -18,7 +18,8 @@ async function runCatalogDemo() {
         category: 'Apparel',
         variants: [
           { color: 'Red', size: 'M', stock: 10 },
-          { color: 'Blue', size: 'L', stock: 5 }
+          { color: 'Blue', size: 'L', stock: 5 },
+          { color: 'Black', size: 'S', stock: 8 }
         ]
       },
       {
@@ -27,7 +28,8 @@ async function runCatalogDemo() {
         category: 'Footwear',
         variants: [
           { color: 'White', size: '42', stock: 7 },
-          { color: 'Black', size: '41', stock: 3 }
+          { color: 'Black', size: '41', stock: 3 },
+          { color: 'Red', size: '40', stock: 2 }
         ]
       },
       {
@@ -35,7 +37,35 @@ async function runCatalogDemo() {
         price: 29.99,
         category: 'Accessories',
         variants: [
-          { color: 'Green', size: 'Standard', stock: 12 }
+          { color: 'Green', size: 'Standard', stock: 12 },
+          { color: 'Blue', size: 'Large', stock: 6 }
+        ]
+      },
+      {
+        name: 'Jeans',
+        price: 39.99,
+        category: 'Apparel',
+        variants: [
+          { color: 'Blue', size: '32', stock: 15 },
+          { color: 'Black', size: '34', stock: 9 }
+        ]
+      },
+      {
+        name: 'Watch',
+        price: 99.99,
+        category: 'Accessories',
+        variants: [
+          { color: 'Silver', size: 'Standard', stock: 5 },
+          { color: 'Gold', size: 'Standard', stock: 2 }
+        ]
+      },
+      {
+        name: 'Hat',
+        price: 14.99,
+        category: 'Apparel',
+        variants: [
+          { color: 'Black', size: 'M', stock: 7 },
+          { color: 'White', size: 'L', stock: 4 }
         ]
       }
     ];

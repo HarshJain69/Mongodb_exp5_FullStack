@@ -10,30 +10,35 @@ async function runCRUD() {
     });
     console.log('Connected to MongoDB');
 
-    // 1. Add a new product
-    const newProduct = new Product({
-      name: 'Script Product',
-      price: 49.99,
-      category: 'Script Category'
-    });
-    await newProduct.save();
-    console.log('Added:', newProduct);
+    // 1. Add multiple products
+    const productData = [
+      { name: 'Script Product', price: 49.99, category: 'Script Category' },
+      { name: 'Laptop', price: 999.99, category: 'Electronics' },
+      { name: 'Coffee Mug', price: 9.99, category: 'Kitchen' },
+      { name: 'Notebook', price: 2.99, category: 'Stationery' },
+      { name: 'Headphones', price: 79.99, category: 'Electronics' }
+    ];
+    await Product.deleteMany({}); // Clean up before insert
+    const newProducts = await Product.insertMany(productData);
+    console.log('Added:', newProducts);
 
     // 2. Retrieve all products
     const products = await Product.find();
     console.log('All Products:', products);
 
-    // 3. Update the first product by ID
-    if (products.length > 0) {
+    // 3. Update the first 3 products by ID
+    for (let i = 0; i < 3 && i < products.length; i++) {
       const updated = await Product.findByIdAndUpdate(
-        products[0]._id,
-        { name: 'Updated Script Product', price: 59.99, category: 'Updated Category' },
+        products[i]._id,
+        { name: products[i].name + ' Updated', price: products[i].price + 10 },
         { new: true, runValidators: true }
       );
       console.log('Updated:', updated);
+    }
 
-      // 4. Delete the product by ID
-      const deleted = await Product.findByIdAndDelete(products[0]._id);
+    // 4. Delete the first 2 products by ID
+    for (let i = 0; i < 2 && i < products.length; i++) {
+      const deleted = await Product.findByIdAndDelete(products[i]._id);
       console.log('Deleted:', deleted);
     }
 
